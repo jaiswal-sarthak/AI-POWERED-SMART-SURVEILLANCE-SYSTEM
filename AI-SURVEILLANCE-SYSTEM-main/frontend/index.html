@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Video Intelligence Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=VILA" alt="Logo">
+                <span>CCTView</span>
+            </div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" data-page="dashboard">
+                <i class="fas fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="live">
+                <i class="fas fa-broadcast-tower"></i>
+                <span>Live Monitor</span>
+            </li>
+            <li class="nav-item" data-page="surveillance">
+                <i class="fas fa-eye"></i>
+                <span>All-Surveillance</span>
+            </li>
+            <li class="nav-item" data-page="analysis">
+                <i class="fas fa-play-circle"></i>
+                <span>Video Analysis</span>
+            </li>
+            <li class="nav-item" data-page="chat">
+                <i class="fas fa-comments"></i>
+                <span>AI Chat</span>
+            </li>
+            <li class="nav-item" data-page="reports">
+                <i class="fas fa-file-alt"></i>
+                <span>Analysis Reports</span>
+            </li>
+            <li class="nav-item" data-page="settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>Admin User</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title" id="pageTitle">Dashboard</h1>
+            </div>
+            
+            <div class="header-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon accidents">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="accidentsCount">0</h3>
+                    <p>Incidents Today</p>
+                    <small class="stat-change positive">+5% from yesterday</small>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon cameras">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="camerasCount">24</h3>
+                    <p>Active Cameras</p>
+                    <small class="stat-change">/ 28 total</small>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon learning">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="learningCount">4,294</h3>
+                    <p>AI Scanned</p>
+                    <small class="stat-change positive">+12% efficiency</small>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon uptime">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>99.8%</h3>
+                    <p>System Uptime</p>
+                    <small class="stat-change positive">Last 30 days</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3>Weekly Incidents</h3>
+                    <div class="card-actions">
+                        <button class="btn-icon">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="incidentsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="card-header">
+                    <h3>Recent Activity</h3>
+                    <button class="btn-text" id="markAllRead">Mark all read</button>
+                </div>
+                <div class="activity-list" id="activityList">
+                    <div class="activity-item">
+                        <div class="activity-icon accident">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>New incident detected:</strong> Crowd on camera M2</p>
+                            <small>2 minutes ago</small>
+                        </div>
+                        <div class="activity-status unread"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="camera-overview">
+                <div class="card-header">
+                    <h3>Camera Overview</h3>
+                    <div class="camera-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="production">Production</button>
+                        <button class="filter-btn" data-filter="warehouse">Warehouse</button>
+                        <button class="filter-btn" data-filter="security">Security</button>
+                    </div>
+                </div>
+                <div class="camera-grid" id="cameraGrid">
+                    <!-- Camera thumbnails will be populated here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p id="loadingText">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
